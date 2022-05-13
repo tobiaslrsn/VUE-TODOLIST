@@ -1,5 +1,4 @@
 <template>
-  <!-- CHILD -->
   <div class="wrapper">
     <li>
       <div>
@@ -25,17 +24,11 @@ export default class TodoSingle extends Vue {
 
   changeStatus() {
     this.$emit("todoStatusUpdate", this.todoProp.id);
-
-    // this.todoProp.done = !this.todoProp.done;
   }
 
   todoDelete() {
     this.$emit("todoDelete", this.todoProp.id);
   }
-
-  /*  todoSort() {
-    this.$emit("todoSort", this.todoProp.id);
-  } */
 }
 </script>
 
@@ -47,8 +40,6 @@ export default class TodoSingle extends Vue {
   align-items: center;
   padding: 1rem 0;
   justify-content: space-between;
-  // border: 1px solid orange;
-
   border-bottom: 1px solid black;
 
   .todo_complete {
@@ -69,6 +60,7 @@ export default class TodoSingle extends Vue {
       gap: 0.3rem;
     }
   }
+
   .todo-updates {
     display: flex;
     flex-direction: row;
@@ -78,10 +70,12 @@ export default class TodoSingle extends Vue {
     gap: 2rem;
     font-size: 1.5rem;
   }
+
   span {
     width: 5rem;
     word-break: break-all;
   }
+
   input {
     border: none;
     outline: none;
@@ -97,13 +91,16 @@ export default class TodoSingle extends Vue {
 .fa-eraser:hover {
   color: rgba(255, 0, 0, 0.375);
 }
+
 .fa-check:hover {
   color: lightblue;
 }
+
 @media screen and (min-width: 930px) {
   .wrapper {
     justify-content: normal;
     gap: 0;
+
     .todo-input {
       width: 30vw;
     }

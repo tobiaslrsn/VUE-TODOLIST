@@ -1,10 +1,7 @@
 <template>
   <div>
     <Header></Header>
-
-    <TodoList>
-      <!-- Här ligger SingleTodo -->
-    </TodoList>
+    <TodoList> </TodoList>
   </div>
 </template>
 
@@ -31,7 +28,6 @@ export default class App extends Vue {}
   box-sizing: border-box;
 }
 body {
-  // background-color: #c7e9fb;
   background: linear-gradient(
     90deg,
     #ebeff62c 0%,
@@ -46,6 +42,7 @@ i:hover {
   cursor: pointer;
   transition: 0.2s;
 }
+
 #app {
   font-family: sans-serif;
   font-weight: 100;

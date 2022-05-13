@@ -51,7 +51,6 @@ export default class TodoList extends Vue {
     this.oneTodo.unshift(p);
 
     localStorage.setItem("todos", JSON.stringify(this.oneTodo));
-    console.log(this.oneTodo);
   }
 
   updateTodo(id: number) {
@@ -65,8 +64,8 @@ export default class TodoList extends Vue {
 
   deleteTodo(d: number) {
     let index = this.oneTodo.findIndex((todo) => todo.id === d);
-
     this.oneTodo.splice(index, 1);
+
     localStorage.setItem("todos", JSON.stringify(this.oneTodo));
   }
 
@@ -93,7 +92,6 @@ export default class TodoList extends Vue {
   doneTodo() {
     this.oneTodo = JSON.parse(localStorage.getItem("todos") || "[]").filter(
       (todo: { done: boolean }) => {
-        console.log(todo);
         return todo.done === true;
       }
     );
@@ -101,7 +99,6 @@ export default class TodoList extends Vue {
   notDone() {
     this.oneTodo = JSON.parse(localStorage.getItem("todos") || "[]").filter(
       (todo: { done: boolean }) => {
-        console.log(todo);
         return todo.done === false;
       }
     );
@@ -110,7 +107,6 @@ export default class TodoList extends Vue {
   allTodos() {
     this.oneTodo = JSON.parse(localStorage.getItem("todos") || "[]").filter(
       (todo: { done: boolean }) => {
-        console.log(todo);
         return todo.done === todo.done;
       }
     );
@@ -124,6 +120,7 @@ export default class TodoList extends Vue {
   background-color: lightblue;
   padding: 0.5rem;
 }
+
 .parent {
   display: flex;
   justify-content: center;
@@ -154,13 +151,13 @@ export default class TodoList extends Vue {
     transition: 0.3s;
     cursor: pointer;
   }
+
   .filter-hover:hover {
     color: gray;
     opacity: 1;
   }
+
   ul {
-    // width: 60vw;
-    // margin-left: 2rem;
     width: 90vw;
     height: 100px;
     justify-content: center;
@@ -181,16 +178,6 @@ export default class TodoList extends Vue {
   }
 }
 
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.5 ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-}
-
 @media screen and (min-width: 930px) {
   .parent {
     flex-direction: row;
@@ -201,13 +188,12 @@ export default class TodoList extends Vue {
 
     .filter {
       width: 30vw;
-
       display: flex;
-
       flex-direction: column;
       justify-content: space-between;
       left: 0;
       margin-top: 1.5rem;
+
       .filter-container {
         gap: 1.5;
         width: 40vw;

@@ -21,7 +21,6 @@ import { Todo } from "../models/Todo";
 
 export default class TodoInput extends Vue {
   todoTask = "";
-  // todoDate: Date = new Date();
 
   todoStatus = false;
   id: number = new Date().getTime();
@@ -33,7 +32,7 @@ export default class TodoInput extends Vue {
         new Todo(
           this.todoTask,
 
-          /* this.todoDate, */ this.todoStatus
+          this.todoStatus
         )
       );
       this.todoTask = "";
@@ -63,10 +62,12 @@ form {
     border-bottom: 1px solid lightblue;
     border-left: 1px solid lightblue;
   }
+
   input::placeholder {
     font-size: 1.3rem;
   }
 }
+
 button {
   width: 5rem;
   height: 2rem;

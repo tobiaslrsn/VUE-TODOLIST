@@ -22,7 +22,6 @@ export default class Header extends Vue {}
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
   height: 15rem;
   width: 100vw;
   display: flex;
@@ -34,10 +33,12 @@ export default class Header extends Vue {}
     color: white;
     text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.374);
   }
+
   .link-container {
     display: flex;
     flex-direction: row;
     gap: 1rem;
+
     a,
     p {
       color: white;
