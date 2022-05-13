@@ -98,7 +98,7 @@ export default class TodoList extends Vue {
   }
   notDone() {
     this.oneTodo = JSON.parse(localStorage.getItem("todos") || "[]").filter(
-      (todo: { done: boolean }) => {
+      (todo: Todo) => {
         return todo.done === false;
       }
     );
@@ -106,7 +106,7 @@ export default class TodoList extends Vue {
 
   allTodos() {
     this.oneTodo = JSON.parse(localStorage.getItem("todos") || "[]").filter(
-      (todo: { done: boolean }) => {
+      (todo: Todo) => {
         return todo.done === todo.done;
       }
     );
