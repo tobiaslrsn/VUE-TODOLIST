@@ -1,20 +1,20 @@
 <template>
-  <!-- PARENT -->
   <div class="parent">
     <TodoInput @todoInput="pushTodo($event)"></TodoInput>
 
     <ul>
       <div v-if="oneTodo.length > 0">
         <div class="filter">
-          <div class="div">
+          <div class="filter-container">
             <p class="sort-by">Sort by:</p>
-            <p @click="mostRecent()" class="filter-hover">newest</p>
-            <p @click="oldestTodo()" class="filter-hover">oldest</p>
-            <p @click="doneTodo()" class="filter-hover">done</p>
-            <p @click="doneTodo()" class="filter-hover">not done</p>
+            <p @click="allTodos" class="filter-hover">All</p>
+            <p @click="mostRecent()" class="filter-hover">Newest</p>
+            <p @click="oldestTodo()" class="filter-hover">Oldest</p>
+            <p @click="doneTodo()" class="filter-hover">Done</p>
+            <p @click="notDone()" class="filter-hover">Not done</p>
           </div>
         </div>
-        <!-- <transition-group> -->
+
         <div v-for="(loopTodo, d) in oneTodo" :key="d.id">
           <TodoSingle
             :todoProp="loopTodo"
@@ -23,7 +23,6 @@
           >
           </TodoSingle>
         </div>
-        <!-- </transition-group> -->
       </div>
       <div class="empty-todolist" v-else>
         <h3>YOU HAVE NOTHING TODO</h3>
@@ -42,12 +41,10 @@ import { Todo } from "../models/Todo";
   components: { TodoSingle, TodoInput },
 })
 export default class TodoList extends Vue {
-  /* Här sker alla förändringar */
   oneTodo: Todo[] = [];
 
   mounted() {
     this.oneTodo = JSON.parse(localStorage.getItem("todos") || "[]");
-    this.mostRecent;
   }
 
   pushTodo(p: Todo) {
@@ -64,8 +61,6 @@ export default class TodoList extends Vue {
       todo.done = !todo.done;
       localStorage.setItem("todos", JSON.stringify(this.oneTodo));
     }
-
-    console.log(this.oneTodo);
   }
 
   deleteTodo(d: number) {
@@ -73,16 +68,13 @@ export default class TodoList extends Vue {
 
     this.oneTodo.splice(index, 1);
     localStorage.setItem("todos", JSON.stringify(this.oneTodo));
-
-    console.log(d);
   }
 
   mostRecent() {
     this.oneTodo.sort((a, b) => {
       if (a.id > b.id) {
         return -1;
-      }
-      {
+      } else {
         return 1;
       }
     });
@@ -99,41 +91,29 @@ export default class TodoList extends Vue {
   }
 
   doneTodo() {
-    /* 
-    if (done === !done) {
-      this.oneTodo.sort((x, y) => x.id - y.id);
-      console.log("works");
-    } else {
-      console.log("fel");
-      return [];
-    } */
-    /* 
-    this.oneTodo.sort((a, b) => {
-      if (a.done !== b.done) {
-        return 1;
+    this.oneTodo = JSON.parse(localStorage.getItem("todos") || "[]").filter(
+      (todo: { done: boolean }) => {
+        console.log(todo);
+        return todo.done === true;
       }
-      if (b.done !== a.done) {
-        return -1;
-      }
-      return 0;
-    }); */
+    );
   }
   notDone() {
-    /* 
-    if (done === !done) {
-      this.oneTodo.sort((x, y) => x.id - y.id);
-      console.log("works");
-    } else {
-      console.log("fel");
-      return [];
-    } */
-    this.oneTodo.sort((a, b) => {
-      if (a.done != b.done) {
-        return 1;
-      } else {
-        return -1;
+    this.oneTodo = JSON.parse(localStorage.getItem("todos") || "[]").filter(
+      (todo: { done: boolean }) => {
+        console.log(todo);
+        return todo.done === false;
       }
-    });
+    );
+  }
+
+  allTodos() {
+    this.oneTodo = JSON.parse(localStorage.getItem("todos") || "[]").filter(
+      (todo: { done: boolean }) => {
+        console.log(todo);
+        return todo.done === todo.done;
+      }
+    );
   }
 }
 </script>
@@ -162,7 +142,7 @@ export default class TodoList extends Vue {
       margin-bottom: 1rem;
     }
 
-    .div {
+    .filter-container {
       display: flex;
       align-items: center;
       gap: 0.5rem;
@@ -228,6 +208,10 @@ export default class TodoList extends Vue {
       justify-content: space-between;
       left: 0;
       margin-top: 1.5rem;
+      .filter-container {
+        gap: 1.5;
+        width: 40vw;
+      }
     }
   }
 }

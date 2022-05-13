@@ -1,12 +1,7 @@
 <template>
   <div>
     <form @submit.prevent>
-      <input
-        type="text"
-        placeholder="New todo..."
-        v-model="todoTask"
-        required
-      />
+      <input type="text" placeholder="New todo..." v-model="todoTask" />
       <button
         @click="
           () => {
@@ -41,6 +36,7 @@ export default class TodoInput extends Vue {
           /* this.todoDate, */ this.todoStatus
         )
       );
+      this.todoTask = "";
     } else {
       console.log("Kan inte lämna tomt");
     }
